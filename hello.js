@@ -21,7 +21,7 @@ const bodyParser = require('body-parser');
 var express = require('express');
 const redis = require('redis')
 
-const db = redis.createClient(6379,'127.0.0.1')
+// const db = redis.createClient(6379,'127.0.0.1')
 
 // import express from 'express';
 var app = express();
@@ -32,6 +32,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
  
 app.get('/', function (req, res) {
+  console.log(req.body);
    res.send('主页GET 请求');
 })
 app.get('/abc',(req,res)=>{
@@ -51,11 +52,12 @@ app.get('/user/:id',(req,res)=>{
 })
 
 app.post('/user',(req,res)=>{
+  console.log(req.body);
   const {id,name,color} = req.body
   console.log(id,name,color);
   // db.set('name',name)
   // db.set('color',color)
-  db.HMSET(id,'name',name,'color',color)
+  // db.HMSET(id,'name',name,'color',color)
   
 })
 
