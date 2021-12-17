@@ -16,6 +16,7 @@
     "commander": "^8.3.0",
     "express": "^4.17.1",
     "mongodb": "^4.2.0",
+    "mongoose": "^6.1.2",
     "nodemon": "^2.0.12",
     "ora": "^1.4.0",
     "progress": "^2.0.3",
