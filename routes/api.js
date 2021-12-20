@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 /**
  * @description 设计请求博客列表内容 后期与MongoDB的schema设计内容关联
+ * 从数据库中请求全部
  */
 router.get('/blog/list', (req, res) => {
     res.json(
@@ -33,7 +34,19 @@ router.get('/blog/list', (req, res) => {
 
     )
 })
-  
+ 
+
+
+
+/**
+ * @description 创建博客接口，后期将传来的数据保存在数据库
+ */
+router.post('/blog/create',(req,res) =>{
+    console.log(req.body);
+    res.json({
+        success:'ok'
+    })
+})
 
     
 
