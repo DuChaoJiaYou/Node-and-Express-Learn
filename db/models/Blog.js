@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-// 定义博客Schema
-const schema = new mongoose.schema({
+// 定义博客Schema  注意调用mongoose.Schema 方法其中 S是大写
+const schema = new mongoose.Schema({
     //博客标题
     title:{
         type:String
