@@ -87,6 +87,17 @@ router.put('/blog/update/:_id', async (req, res) => {
 
 })
 
+/**
+ * @description 删除博客接口
+ */
+router.delete('/blog/delete/:_id', async (req, res) => {
+    const deleteModel = require('../db/models/Blog')
+    await deleteModel.findByIdAndDelete(req.params._id, (err, doc) => {
+        err && res.send({ code: 0, msg: err.msg })
+        res.send({code:1,msg:doc})
+    })
+})
+
 
 
 
