@@ -67,6 +67,31 @@ router.post('/blog/create', async (req, res) => {
 })
 
 
+/**
+ * @description 修改博客接口，根据id查找并修改
+ */
+router.put('/blog/update/:_id', async (req, res) => {
+    const updateBolg = require('../db/models/Blog')
+    const _id = req.params._id
+    console.log(_id)
+    console.log(req.body)
+    await updateBolg.findByIdAndUpdate(_id, req.body,
+        (err, row) => {
+            err && res.send({ code: 0, msg: err.msg })
+            res.send({ code: 1, msg: row })
+        })
+    // .exec((err,data)=>{
+
+
+    // })
+
+})
+
+
+
+
+
+
 
 module.exports = router
 
