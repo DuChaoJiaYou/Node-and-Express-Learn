@@ -94,12 +94,22 @@ router.delete('/blog/delete/:_id', async (req, res) => {
     const deleteModel = require('../db/models/Blog')
     await deleteModel.findByIdAndDelete(req.params._id, (err, doc) => {
         err && res.send({ code: 0, msg: err.msg })
-        res.send({code:1,msg:doc})
+        res.send({ code: 1, msg: doc })
     })
 })
 
-
-
+/**
+ * @description 增加类别
+ */
+router.post('/createCategory', async (req, res) => {
+    const createCategory = require('../db/models/Category')
+    //增加一级分类，删除 parent 字段
+    !req.body.parent && delete req.body.parent
+    await createCategory.create(req.body, (err, doc) => {
+        err && res.send({ code: 0 })
+        res.send({ code: 1, msg: doc })
+    })
+})
 
 
 
