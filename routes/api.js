@@ -5,7 +5,7 @@ const router = express.Router()
 
 
 /**
- * @description 设计请求博客列表内容 后期与MongoDB的schema设计内容关联
+ * @description 查找博客列表内容 后期与MongoDB的schema设计内容关联
  * 从数据库中请求全部
  */
 router.get('/blog/list', async (req, res) => {
@@ -94,9 +94,42 @@ router.delete('/blog/delete/:_id', async (req, res) => {
     const deleteModel = require('../db/models/Blog')
     await deleteModel.findByIdAndDelete(req.params._id, (err, doc) => {
         err && res.send({ code: 0, msg: err.msg })
-        res.send({code:1,msg:doc})
+        res.send({ code: 1, msg: doc })
     })
 })
+
+/**
+ * @description 增加类别
+ */
+router.post('/createCategory', async (req, res) => {
+    const createCategory = require('../db/models/Category')
+    //增加一级分类，删除 parent 字段
+    !req.body.parent && delete req.body.parent
+    await createCategory.create(req.body, (err, doc) => {
+        err && res.send({ code: 0 })
+        res.send({ code: 1, msg: doc })
+    })
+})
+
+
+/**
+ * @description 初始化一级分类
+ */
+router.get('/categoryParentList', async (req, res) => {
+    const findParentCategory = require('../db/models/Category')
+    let query = {
+        parent: undefined
+    }
+    await findParentCategory.find(query, (err, doc) => {
+        err && res.send({ code: 0, msg: err })
+        res.send({ code: 1, msg: doc })
+    })
+})
+
+
+
+
+
 
 
 
