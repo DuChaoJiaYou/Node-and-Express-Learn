@@ -5,7 +5,7 @@ const router = express.Router()
 
 
 /**
- * @description 设计请求博客列表内容 后期与MongoDB的schema设计内容关联
+ * @description 查找博客列表内容 后期与MongoDB的schema设计内容关联
  * 从数据库中请求全部
  */
 router.get('/blog/list', async (req, res) => {
@@ -110,6 +110,29 @@ router.post('/createCategory', async (req, res) => {
         res.send({ code: 1, msg: doc })
     })
 })
+
+
+/**
+ * @description 初始化一级分类
+ */
+router.get('/categoryParentList', async (req, res) => {
+    const findParentCategory = require('../db/models/Category')
+    let query = {
+        parent: undefined
+    }
+    await findParentCategory.find(query, (err, doc) => {
+        err && res.send({ code: 0, msg: err })
+        res.send({ code: 1, msg: doc })
+    })
+})
+
+
+
+
+
+
+
+
 
 
 
